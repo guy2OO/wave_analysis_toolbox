@@ -160,8 +160,8 @@ for i = 1:length(DF_XAxis)
         x1 = 0;
         x2 = period(i);
 
-        F = @(t) -2 .* ((rho.*g.*height(i))./k(i).^2) .* A(i) .* tanh(k(i).*depth) .* tanh(omega.*t - alpha);
-        M = @(t) 2 .* ((rho.*g.*height(i))./k(i).^3) .* A(i) .* ((k(i).*z_c.*sinh(k(i).*depth)+cosh(k(i).*depth)-1)/cosh(k(i).*depth)) .* sin(omega.*t - alpha);
+        F = @(t) -2 .* ((rho.*g.*height(i))./k(i).^2) .* A(i) .* tanh(k(i).*depth) .* tanh(omega(i).*t - alpha(i));
+        M = @(t) 2 .* ((rho.*g.*height(i))./k(i).^3) .* A(i) .* ((k(i).*z_c.*sinh(k(i).*depth)+cosh(k(i).*depth)-1)/cosh(k(i).*depth)) .* sin(omega(i).*t - alpha(i));
 
         [~,Fm] = fminbnd(F,x1,x2);
         [~,Mm] = fminbnd(M,x1,x2);
