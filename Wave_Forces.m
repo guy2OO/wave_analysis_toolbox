@@ -18,7 +18,6 @@ rho = 1025;
 %z_c = 5;
 %z_c = -depth;
 
-
 %% Validate input data
 
     % Check if inputs are positive values
@@ -128,7 +127,7 @@ axis('square')
 
 hold off
 
-%% Determin if wave has inertia or drag dominance and calculate force
+%% Determine if wave has inertia or drag dominance and calculate force
 
 for i = 1:length(DF_XAxis)
     if DF_XAxis(i) > 0.48
@@ -220,7 +219,7 @@ annotation(gcf,'Textbox','String',wheString,'Interpreter','Tex',...
 
 % Write export data to file
 
-name = sprintf("WaveForces_%s.dat",datetime('now'));
-writetable(exportData,name);
+name = sprintf('WaveForces_%s.csv',datetime("now"));
+writetable(exportData,name,'WriteRowNames',true);
 
 end
