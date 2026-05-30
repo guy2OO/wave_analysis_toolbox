@@ -148,7 +148,7 @@ for i = 1:length(DF_XAxis)
     
         alpha(i) = atan(Jd_1/Yd_1);
     
-        A(i) = (J(2).^2 + Y(2).^2).^(-1/2);
+        A(i) = (Jd_1.^2 + Yd_1.^2).^(-1/2);
     
         max_inertia_F(i) = -2 .* ((rho.*g.*height(i))./k(i).^2) .* A(i) .* tanh(k(i).*depth);
         max_Drag_F(i) = 0;
@@ -159,7 +159,7 @@ for i = 1:length(DF_XAxis)
         x1 = 0;
         x2 = period(i);
 
-        F = @(t) -2 .* ((rho.*g.*height(i))./k(i).^2) .* A(i) .* tanh(k(i).*depth) .* tanh(omega(i).*t - alpha(i));
+        F = @(t) -2 .* ((rho.*g.*height(i))./k(i).^2) .* A(i) .* tanh(k(i).*depth) .* sin(omega(i).*t - alpha(i));
         M = @(t) 2 .* ((rho.*g.*height(i))./k(i).^3) .* A(i) .* ((k(i).*z_c.*sinh(k(i).*depth)+cosh(k(i).*depth)-1)/cosh(k(i).*depth)) .* sin(omega(i).*t - alpha(i));
 
         [~,Fm] = fminbnd(F,x1,x2);
